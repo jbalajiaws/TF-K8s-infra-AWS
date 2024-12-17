@@ -18,6 +18,11 @@ output "subnet_names" {
   value       = aws_subnet.my_subnets[*].tags.Name
 }
 
+output "subnet_ids" {
+  description = "List of all subnet names (public and private)."
+  value       = aws_subnet.my_subnets[*].id
+}
+
 output "public_subnets" {
   description = "List of public subnet names."
   value = [

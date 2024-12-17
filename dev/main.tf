@@ -36,3 +36,30 @@ module "rds" {
   db_subnet_group_name = "rds_subnet_group"
 }
 
+
+module "eks" {
+  depends_on      = [module.networking]
+  source          = "../module/kubernetes"
+  cluster_name    = "${var.env}-eks-cluster"
+  version         = "1.27"  # Adjust the Kubernetes version if needed
+  vpc_id          = module.networking.vpc_id
+  subnet_ids      = module.networking.subnet_ids  # Subnets from networking module
+  sg_id           = module.networking.security_group_ids[0]
+
+  node_groups = {
+    eks_nodes = {
+      desired_capacity = 2
+      max_capacity     = 3
+      min_capacity     = 1
+      instance_type    = "t3.medium"
+    }
+  }
+
+  key_name = var.key_name
+
+  tags = {
+    Environment = var.env
+    Project     = "eks-cluster"
+  }
+}
+

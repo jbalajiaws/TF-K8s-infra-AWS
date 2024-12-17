@@ -70,6 +70,11 @@ output "private_subnets" {
   value       = module.networking.private_subnets
 }
 
+output "subnet_ids" {
+  description = "List of all subnet names (public and private)."
+  value       = module.networking.subnet_ids
+}
+
 #======================
 #S3  Values
 #======================
@@ -91,3 +96,14 @@ output "rds_private_subnets" {
 #output "rds_public_subnets" {
 #  value = module.rds.rds_private_subnets
 #}
+#======================
+#K8S  Values
+#======================
+
+output "cluster_name" {
+  value = module.eks.cluster_name
+}
+
+output "cluster_security_group_id" {
+  value = module.eks.cluster_security_group_id
+}

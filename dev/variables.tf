@@ -211,3 +211,19 @@ variable "tags" {
     Environment = "development"
   }
 }
+
+##=========================
+##K8S Variable
+##=========================
+
+variable "key_name" {
+  description = "EC2 key pair name for SSH access to EKS worker nodes"
+  type        = string
+  default     = ""  # If you don't need SSH access, you can leave this blank or omit it.
+}
+
+variable "instance_type" {
+  description = "Instance type for EKS worker nodes"
+  type        = string
+  default     = "t3.medium"
+}
